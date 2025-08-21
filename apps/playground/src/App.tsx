@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import {Tabs} from "lcsy-design"
-import './App.css'
-
+const TabsParent = () => {
+  //切换tab的时候的回调函数
+  const onChange=(key:number|string)=>{
+    console.log("%c Line:39 🥤 key", "color:#465975", key);
+  }
+  const items = [
+    {
+      key:'1',
+      label: "Tab1",
+      children: "tab1",
+    },
+    {
+      key:'2',
+      label: "Tab2",
+      children: "tab2",
+    },
+    {
+      key:'3',
+      label: "Tab3",
+      children: "tab3",
+    },
+  ]
+  return <Tabs defaultActiveKey="2" items={items} onChange={onChange} className='tab-body-color' ></Tabs>;
+};
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <Tabs />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <TabsParent/>
     </>
   )
 }
