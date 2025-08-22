@@ -18,7 +18,7 @@ interface Props {
   onChange: (key: Key) => void;
   className?:string
 }
-const Tabs = ({ defaultActiveKey, items, onChange,className }: Props) => {
+const Tabs = ({ defaultActiveKey, items, onChange,className}: Props) => {
   const initialKey = defaultActiveKey ?? items[0]?.key; //1
   const [activeKey, setActiveKey] = useState(initialKey); //1
   const handleClick = (key) => {
@@ -38,7 +38,7 @@ const Tabs = ({ defaultActiveKey, items, onChange,className }: Props) => {
           {items.map((tabSet) => (
             <div
               key={tabSet.key}
-              className={`tab ${activeKey === tabSet?.key ? "active" : ""}`}
+              className={`tab ${activeKey === tabSet?.key ? "active" : ""} ${className || ""}`}
               onClick={() => {
                 handleClick(tabSet.key);
               }}
