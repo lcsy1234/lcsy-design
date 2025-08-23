@@ -5,14 +5,15 @@ import { ReactNode } from "react";
 interface ButtonProps {
   children: ReactNode;
   className?: string;
-  appName: string;
+  appName?: string;
+  onClick?:()=>void
 }
 
- const Button = ({ children, className, appName }: ButtonProps) => {
+ const Button = ({ children, className, appName,onClick }: ButtonProps) => {
   return (
     <button
       className={className}
-      onClick={() => alert(`Hello from your ${appName} app!`)}
+      onClick={onClick}
     >
       {children}
     </button>

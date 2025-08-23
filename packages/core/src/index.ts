@@ -1,3 +1,4 @@
 import Button from './button'
 import Tabs from "./tabs"
-export { Button,Tabs }
+import Modal from './modal'
+export { Button,Tabs,Modal }
