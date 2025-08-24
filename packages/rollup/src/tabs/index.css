@@ -1,0 +1,31 @@
+.tab-whole{
+    width: 100%;
+    height: 500px;
+    border: 1px solid black;
+}
+.tab-title{
+    width: 100%;
+    height: 15%;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: left;
+    align-items:end;
+     border-bottom: 1px solid grey
+
+}
+.tab{
+    text-align: center;
+    line-height: 60px;
+    margin-left: 20px;
+    width: 60px;
+    height:70%;
+}
+.tab.active{
+    color:  blue;
+    border-bottom: 2px solid blue;
+}
+.tab-body{
+    width: 100%;
+    height: 100%;
+    background-color:blue;
+}

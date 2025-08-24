@@ -1,7 +1,7 @@
 {
   "name": "playground",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,8 @@
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "lcsy-design": "workspace:*"
+    "lcsy-design": "workspace:*",
+    "lcsy-design-rollup":"workspace:*"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

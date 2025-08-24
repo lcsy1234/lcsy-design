@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button, Modal } from "lcsy-design";
+import { Modal } from "lcsy-design-rollup";
+import { Button } from "lcsy-design-rollup";
 
 const ModalPlay: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,7 +19,7 @@ const ModalPlay: React.FC = () => {
   //     closable={{ 'aria-label': 'Custom Close Button' }}
   return (
     <>
-      <Button onClick={showModal} >Open Modal</Button>
+      <Button onClick={showModal}>Open Modal</Button>
       <Modal
         title="Basic Modal"
         open={isModalOpen}
