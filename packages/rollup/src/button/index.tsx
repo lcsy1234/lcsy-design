@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode } from "react";
 
 interface ButtonProps {
@@ -19,4 +17,4 @@ interface ButtonProps {
     </button>
   );
 };
-export default Button
+ export default Button;

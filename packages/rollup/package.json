@@ -4,12 +4,14 @@
   "private": false,
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.mjs",
-  "types": "module",
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c && npm run dts",
+    "dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
@@ -22,6 +24,7 @@
     "@types/react": "19.1.0",
     "@types/react-dom": "19.1.1",
     "changesets": "^1.0.2",
+    "dts-bundle-generator": "^9.5.1",
     "eslint": "^9.33.0",
     "postcss": "^8.5.6",
     "rollup": "^4.48.0",

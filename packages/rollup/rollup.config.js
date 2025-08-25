@@ -21,6 +21,11 @@ export default {
       file: "dist/dist.umd.js",
       name: "Xia",
       format: "umd",
+globals: {
+        react: "React",
+        "react-dom": "ReactDOM",
+        "react/jsx-runtime": "ReactJSXRuntime", // 对应 jsx-runtime 的全局变量?没太懂
+      },
     },
   ],
   plugins: [
