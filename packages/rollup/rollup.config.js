@@ -18,7 +18,13 @@ function getEntries() {
 
   fs.readdirSync(srcDir).forEach((name) => {
     const dir = path.join(srcDir, name);
-    if (fs.statSync(dir).isDirectory()) {
+    //要手动排出哪些是非入口文件夹，所以就体现出了将组件放在componets下的好处
+    if (
+      fs.statSync(dir).isDirectory() &&
+      name !== "assets" &&
+      name !== "styles" &&
+      name !== "utils"
+    ) {
       const tsx = path.join(dir, "index.tsx");
       const ts = path.join(dir, "index.ts");
       if (fs.existsSync(tsx)) {
@@ -26,30 +32,49 @@ function getEntries() {
       } else if (fs.existsSync(ts)) {
         entries[name] = `src/${name}/index.ts`;
       }
-    }else{
+    } else if (!fs.statSync(dir).isDirectory()) {
       const ext = path.extname(name);
       const baseName = path.basename(name, ext);
-      if (ext === '.ts' || ext === '.tsx') {
+      if (ext === ".ts" || ext === ".tsx") {
         entries[baseName] = `src/${name}`;
       }
     }
   });
   return entries;
 }
-getEntries()
 // ---cut---
 export default {
   input: getEntries(),
+
   output: [
     {
       dir: "dist/cjs",
       format: "cjs",
-      entryFileNames: chunk => chunk.name === 'index' ? 'index.js' : '[name]/index.js',
+      entryFileNames: (chunk) =>
+        chunk.name === "index" ? "index.js" : "[name]/index.js",
+      chunkFileNames: "chunks/[name]-[hash].js",
+      manualChunks: {
+        // 将src/utils下的所有模块打包到chunks/utils.js
+        utils: ["src/utils/index.ts"],
+        // // 可选: 按目录自动分组其他模块
+        // // // 例如将src/lib下的模块打包到chunks/lib.js
+        // 'lib': (module) => module.id.includes('src/lib')
+      },
     },
     {
+      experimentalCodeSplitting: true,
       dir: "dist/esm",
       format: "esm",
-      entryFileNames: chunk => chunk.name === 'index' ? 'index.mjs' : '[name]/index.mjs',
+      entryFileNames: (chunk) =>
+        chunk.name === "index" ? "index.mjs" : "[name]/index.mjs",
+      chunkFileNames: "chunks/[name]-[hash].js",
+      manualChunks: {
+        // 将src/utils下的所有模块打包到chunks/utils.js
+        utils: ["src/utils/index.ts"],
+        // // 可选: 按目录自动分组其他模块
+        // // // 例如将src/lib下的模块打包到chunks/lib.js
+        // 'lib': (module) => module.id.includes('src/lib')
+      },
     },
     // {
     //   dir: "dist/umd",
@@ -62,6 +87,7 @@ export default {
     //   },
     // },
   ],
+
   plugins: [
     typescript({
       tsconfig: "./tsconfig.json",

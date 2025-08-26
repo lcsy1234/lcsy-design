@@ -1,5 +1,6 @@
 import { type JSX } from "react";
-
+import helper from '../utils/index';
+helper()
 export function Card({
   className,
   title,
