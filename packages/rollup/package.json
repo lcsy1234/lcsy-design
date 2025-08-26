@@ -4,13 +4,13 @@
   "private": false,
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.mjs",
-  "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/esm/index.d.ts",
+  
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "build": "rollup -c && npm run dts",
+    "build": "rollup -c",
     "dts": "dts-bundle-generator -o dist/index.d.ts src/index.ts"
   },
   "devDependencies": {
@@ -29,6 +29,7 @@
     "postcss": "^8.5.6",
     "rollup": "^4.48.0",
     "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "5.9.2"
   },
   "dependencies": {

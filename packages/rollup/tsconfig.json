@@ -3,15 +3,16 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "jsx": "react-jsx",  // 关键配置：指定 JSX 编译方式（根据 React 版本选择）
+    "jsx": "react-jsx", // 关键配置：指定 JSX 编译方式（根据 React 版本选择）
     "jsxImportSource": "react", // 明确指定 JSX 运行时来源
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": "src",
-    // "declaration": true,
-    // "declarationDir": "dist/types",
-    // "outDir": "dist",
+    "rootDir": "src", // 源码根目录，确保路径映射正确
+    "declaration": true,
+    // "outDir": "./dist/types", // 必须有
+    // "declarationDir": "./dist/types"
+     "outDir": "./dist/tmp" 
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
