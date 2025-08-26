@@ -13,39 +13,42 @@ const __dirname = path.dirname(__filename);
 
 // 自动扫描 src 下所有一级目录的 index.ts/tsx 作为入口
 function getEntries() {
-  const srcDir = path.resolve(__dirname, "src");
+  const srcDir = path.resolve(__dirname, 'src');
   const entries = {};
 
-  fs.readdirSync(srcDir).forEach((name) => {
-    const dir = path.join(srcDir, name);
-    //要手动排出哪些是非入口文件夹，所以就体现出了将组件放在componets下的好处
-    if (
-      fs.statSync(dir).isDirectory() &&
-      name !== "assets" &&
-      name !== "styles" &&
-      name !== "utils"
-    ) {
-      const tsx = path.join(dir, "index.tsx");
-      const ts = path.join(dir, "index.ts");
-      if (fs.existsSync(tsx)) {
-        entries[name] = `src/${name}/index.tsx`;
-      } else if (fs.existsSync(ts)) {
-        entries[name] = `src/${name}/index.ts`;
+  // 处理components目录下的组件
+  const componentsDir = path.join(srcDir, 'components');
+  if (fs.existsSync(componentsDir)) {
+    fs.readdirSync(componentsDir).forEach(name => {
+      const dir = path.join(componentsDir, name);
+      if (fs.statSync(dir).isDirectory()) {
+        const tsx = path.join(dir, 'index.tsx');
+        const ts = path.join(dir, 'index.ts');
+        if (fs.existsSync(tsx)) {
+          entries[`components/${name}`] = tsx;
+        } else if (fs.existsSync(ts)) {
+          entries[`components/${name}`] = ts;
+        }
       }
-    } else if (!fs.statSync(dir).isDirectory()) {
-      const ext = path.extname(name);
-      const baseName = path.basename(name, ext);
-      if (ext === ".ts" || ext === ".tsx") {
-        entries[baseName] = `src/${name}`;
-      }
-    }
-  });
+    });
+  }
+
+  // 处理外部index文件
+  const rootIndexTSX = path.join(srcDir, 'index.tsx');
+  const rootIndexTS = path.join(srcDir, 'index.ts');
+  if (fs.existsSync(rootIndexTSX)) {
+    entries['index'] = rootIndexTSX;
+  } else if (fs.existsSync(rootIndexTS)) {
+    entries['index'] = rootIndexTS;
+  }
+
   return entries;
 }
+console.log("%c Line:16 🥪 getEntries", "color:#465975", getEntries());
+
 // ---cut---
 export default {
   input: getEntries(),
-
   output: [
     {
       dir: "dist/cjs",
