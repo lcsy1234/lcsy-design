@@ -1,5 +1,6 @@
 import { pluginReact } from "@rsbuild/plugin-react";
 import { defineConfig } from "@rslib/core";
+import { pluginSass } from '@rsbuild/plugin-sass';
 const isDev = process.env.NODE_ENV === "development";
 export default defineConfig({
   lib: [
@@ -35,5 +36,6 @@ export default defineConfig({
         runtime: "automatic",
       },
     }),
+    pluginSass()
   ],
 });
