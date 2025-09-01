@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import "./index.scss";
 
 const prefix = "lcsy-select";
@@ -35,6 +35,12 @@ const Select = (props: Props) => {
   const { defaultValue, onChange, options, style, disabled } = props;
   const [value, setValue] = useState(defaultValue);
   const [showOption, setShowOption] = useState(false);
+  const contentRef = useRef(null);
+  useEffect(() => {
+    if (showOption && contentRef.current) {
+      contentRef.current.focus();
+    }
+  }, [showOption]);
   const handleShow = () => {
     if (disabled) return;
     setShowOption(!showOption);
@@ -44,12 +50,8 @@ const Select = (props: Props) => {
     if (!showOption) {
       return <></>;
     }
-
     return (
-      <div
-        tabIndex={0}
-        className={`${prefix}-content`}
-      >
+      <div tabIndex={0} ref={contentRef} onBlur={()=>{setShowOption(false)}} className={`${prefix}-content`}>
         {options.map((option) => (
           <div
             key={option.label}
