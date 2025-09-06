@@ -1,6 +1,6 @@
 {
   "name": "lcsy-design",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": false,
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.mjs",

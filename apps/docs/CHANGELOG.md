@@ -1,5 +1,12 @@
 # docs
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies
+  - lcsy-design@1.0.6
+
 ## 0.1.2
 
 ### Patch Changes
