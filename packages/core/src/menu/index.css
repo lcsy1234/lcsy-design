@@ -1,0 +1,36 @@
+.menu-container {
+  width: 200px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+
+.menu-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: #f5f5f5;
+}
+
+.menu-item-active {
+  background: #e6f7ff; /* 选中高亮背景 */
+  color: #1890ff; /* 选中文字颜色 */
+}
+
+.menu-item-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.submenu {
+  padding-left: 16px; /* 子菜单缩进 */
+  border-left: 1px solid #f0f0f0;
+}
+
+.icon {
+  margin-right: 8px;
+  font-size: 14px;
+}
