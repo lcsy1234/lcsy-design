@@ -13,17 +13,15 @@ export default function MenuItem({
   setSelectedKey,
 }) {
   // 1. 状态判断：当前项是否展开、是否选中
-  let isOpen = openKeys[item.key] || false;//这里设置的是是否打开
+  const isOpen = openKeys[item.key] || false;//这里设置的是是否打开
   const isActive = selectedKey === item.key;
 
   // 2. 点击父菜单标题：切换“展开/折叠”
   const handleTitleClick = (key) => {
     console.log("%c Line:21 🍩 key", "color:#b03734", key);
     if (item.children && item.children.length > 0) {
-        //现在要做的就是如果点击的是子组件就将父级展开
       setOpenKeys((prev) => {
         console.log("%c Line:24 🍉 prev", "color:#ffdd4d", prev);
-
         return {
           ...prev,
           [item.key]: !isOpen,
@@ -45,13 +43,16 @@ export default function MenuItem({
       className={`menu-item ${isActive ? "menu-item-active" : ""}`}
       // 若有子菜单，点击标题；否则点击整个项
       onClick={
-        item.children
-          ? () => {
-              handleTitleClick(item.key);
-            }
-          : () => {
-              handleOptionClick();
-            }
+        (e)=>{
+          e.stopPropagation();
+          console.log("%c Line:46 🥛 onClick", "color:#4fff4B", item.key);
+          if(item.children){
+            handleTitleClick(item.key);
+          } else {
+            handleOptionClick();
+          }
+        }
+        
       }
     >
       {/* 菜单项内容（图标 + 文本 + 展开箭头） */}
@@ -64,7 +65,7 @@ export default function MenuItem({
         )}
       </div>
 
-      {isOpen && item.children && item.children.length > 0 && (
+      {isOpen && item?.children?.length > 0 && (
         <div className="submenu">
           {item.children.map((child) => (
             <MenuItem
