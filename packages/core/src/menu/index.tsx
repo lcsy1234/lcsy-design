@@ -1,48 +1,20 @@
 import { useState } from "react";
 import MenuItem from "./MenuItem";
-// import "./index.css";
-const menuData = [
-  {
-    key: "nav1",
-    label: "Navigation One",
-    icon: "📧", // 假设用自定义Icon组件，也可传React元素
-    defaultActive: true,
-    children: [
-      {
-        key: "item1",
-        label: "Item 1",
-        children: [
-          { key: "option1", label: "Option 1" },
-          { key: "option2", label: "Option 2" }, // 初始选中
-        ],
-      },
-      {
-        key: "item2",
-        label: "Item 2",
-        children: [
-          { key: "option3", label: "Option 3" },
-          { key: "option4", label: "Option 4" },
-        ],
-      },
-    ],
-  },
-  {
-    key: "nav2",
-    label: "Navigation Two",
-    icon: "👅",
-    children: [
-      { key: "option5", label: "Option 5" },
-      { key: "option6", label: "Option 6" },
-    ],
-  },
-  {
-    key: "nav3",
-    label: "Navigation Three",
-    icon: "⚙️",
-  },
-];
+// / 1. 定义菜单项类型
+interface MenuItemType {
+  key: string;
+  label: string;
+  icon?: string;
+  defaultActive?: boolean;
+  children?: MenuItemType[];
+}
 
-export default function Menu() {
+// 2. 定义组件的 props 类型（包含 menuData）
+interface MenuProps {
+  menuData: MenuItemType[]; // 声明接收 menuData，类型为菜单项数组
+}
+
+export default function Menu({menuData}: MenuProps) {
   // 状态1：管理“展开/折叠”（对象存储，key为菜单项key，值为是否展开）
   const [openKeys, setOpenKeys] = useState(() => {
     // 初始化时，找到默认展开的父菜单（示例中无，可自定义）
@@ -85,52 +57,3 @@ export default function Menu() {
     </div>
   );
 }
-// import { useState } from "react";
-// import MenuItem from "./MenuItem";
-
-// // 菜单数据源
-// const menuData = [
-//   {
-//     key: "nav1",
-//     label: "Navigation One",
-//     icon: "mail",
-//     children: [
-//       {
-//         key: "item1",
-//         label: "Item 1",
-//         children: [
-//           { key: "option1", label: "Option 1" },
-//           { key: "option2", label: "Option 2" },
-//         ],
-//       },
-//       {
-//         key: "item2",
-//         label: "Item 2",
-//         children: [
-//           { key: "option3", label: "Option 3" },
-//           { key: "option4", label: "Option 4" },
-//         ],
-//       },
-//     ],
-//   },
-// ];
-
-// export default function Menu() {
-//   const [openKeys, setOpenKeys] = useState({}); // 记录各菜单的展开状态
-//   const [selectedKey, setSelectedKey] = useState(""); // 记录选中的菜单项
-
-//   return (
-//     <div className="menu-container">
-//       {menuData.map((item) => (
-//         <MenuItem
-//           key={item.key}
-//           item={item}
-//           openKeys={openKeys}
-//           setOpenKeys={setOpenKeys}
-//           selectedKey={selectedKey}
-//           setSelectedKey={setSelectedKey}
-//         />
-//       ))}
-//     </div>
-//   );
-// }

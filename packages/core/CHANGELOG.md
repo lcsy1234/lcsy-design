@@ -1,5 +1,11 @@
 # lcsy-design
 
+## 1.0.8
+
+### Patch Changes
+
+- "menu组件"
+
 ## 1.0.6
 
 ### Patch Changes
