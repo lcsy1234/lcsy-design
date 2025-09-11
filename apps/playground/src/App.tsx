@@ -1,52 +1,34 @@
 // import { useEffect, useState, useRef } from "react";
-import ModalPlay from "./assets/component/modal";
-import { Menu } from "lcsy-design";
+// import ModalPlay from "./assets/component/modal";
+import {Tabs} from "lcsy-design";
 function App() {
-  const menuData = [
-  {
-    key: "nav1",
-    label: "Navigation One",
-    icon: "📧", // 假设用自定义Icon组件，也可传React元素
-    defaultActive: true,
-    children: [
-      {
-        key: "item1",
-        label: "Item 1",
-        children: [
-          { key: "option1", label: "Option 1" },
-          { key: "option2", label: "Option 2" }, // 初始选中
-        ],
-      },
-      {
-        key: "item2",
-        label: "Item 2",
-        children: [
-          { key: "option3", label: "Option 3" },
-          { key: "option4", label: "Option 4" },
-        ],
-      },
-    ],
-  },
-  {
-    key: "nav2",
-    label: "Navigation Two",
-    icon: "👅",
-    children: [
-      { key: "option5", label: "Option 5" },
-      { key: "option6", label: "Option 6" },
-    ],
-  },
-  {
-    key: "nav3",
-    label: "Navigation Three",
-    icon: "⚙️",
-  },
-];
+  const onChange = (key: number|string) => {
+    console.log(key);
+  };
+  const items = [
+    {
+      key: "1",
+      label: "Tab 1",
+      children: "Content of Tab Pane 1",
+    },
+    {
+      key: "2",
+      label: "Tab 2",
+      children: "Content of Tab Pane 2",
+    },
+    {
+      key: "3",
+      label: "Tab 3",
+      children: "Content of Tab Pane 3",
+      disabled: true,
+    },
+  ];
   return (
     <>
-      <Menu menuData={menuData}></Menu>
-      <ModalPlay></ModalPlay>
-      {/* <Child onValueChange={setValue} />; */}
+      <Tabs defaultActiveKey="1" 
+      centered
+      items={items} onChange={onChange} />;
+      {/* <ModalPlay></ModalPlay> */}
     </>
   );
 }

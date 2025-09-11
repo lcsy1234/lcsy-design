@@ -1,5 +1,6 @@
 import "./index.css";
 import { useState, ReactNode, Children } from "react";
+import { useRef, useEffect } from "react";
 type Key = number | string;
 interface TabItem {
   key: Key; // 唯一标识，必须存在
@@ -16,11 +17,19 @@ interface Props {
   defaultActiveKey: Key;
   items: TabItem[];
   onChange: (key: Key) => void;
-  className?:string
+  className?: string;
+  centered?: boolean;
 }
-const Tabs = ({ defaultActiveKey, items, onChange,className}: Props) => {
+const Tabs = ({
+  defaultActiveKey,
+  items,
+  onChange,
+  className,
+  centered = false,
+}: Props) => {
   const initialKey = defaultActiveKey ?? items[0]?.key; //1
   const [activeKey, setActiveKey] = useState(initialKey); //1
+
   const handleClick = (key) => {
     const tab = items.find((item) => item.key === key);
     if (tab?.disabled) return;
@@ -29,16 +38,17 @@ const Tabs = ({ defaultActiveKey, items, onChange,className}: Props) => {
       onChange(key);
     }
   };
+
   const tabContent = items.find((item) => item.key === activeKey);
 
   return (
     <div>
       <div className="tab-whole">
-        <div className="tab-title">
+        <div className={`tab-title ${centered ? "centered" : ""}`}>
           {items.map((tabSet) => (
             <div
               key={tabSet.key}
-              className={`tab ${activeKey === tabSet?.key ? "active" : ""} ${className || ""}`}
+              className={`tab ${activeKey === tabSet?.key ? "active" : ""} ${tabSet?.disabled ? "disabled" : ""} ${className || ""} `}
               onClick={() => {
                 handleClick(tabSet.key);
               }}
