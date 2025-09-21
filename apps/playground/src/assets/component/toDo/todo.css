@@ -1,0 +1,11 @@
+.input-containers{
+    display: flex;
+
+}
+.item-container{
+    display: flex;
+
+}
+.item{
+    margin-right: 10px;
+}

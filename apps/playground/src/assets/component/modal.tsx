@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Modal } from "lcsy-design-rollup";
-import { Button } from "lcsy-design-rollup";
+import { Modal } from "lcsy-design";
+import { Button } from "lcsy-design";
 
 const ModalPlay: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
