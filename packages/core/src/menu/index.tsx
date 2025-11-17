@@ -43,7 +43,7 @@ export default function Menu({menuData}: MenuProps) {
   });
 
   return (
-    <div className="menu-container">
+    <div className="lcsy-menu" role="menu">
       {menuData.map((item) => (
         <MenuItem
           key={item.key}

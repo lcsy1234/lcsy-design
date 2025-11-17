@@ -51,12 +51,16 @@ const Select = (props: Props) => {
       return <></>;
     }
     return (
-      <div tabIndex={0} ref={contentRef} onBlur={()=>{setShowOption(false)}} className={`${prefix}-content`}>
+      <div tabIndex={0} ref={contentRef} role="listbox" onBlur={()=>{setShowOption(false)}} className={`${prefix}-content`}>
         {options.map((option) => (
           <div
             key={option.label}
+            role="option"
+            aria-selected={option.value === value}
+            aria-disabled={!!option.disabled}
             className={`${prefix}-option ${option.value === value ? `${prefix}-option-selected` : ""} ${option.disabled ? `${prefix}-option-disabled` : ""}`}
             onClick={() => {
+              if (option.disabled) return;
               setValue(option.value);
               onChange(option.value);
               setShowOption(false);

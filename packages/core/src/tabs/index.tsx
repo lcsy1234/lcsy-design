@@ -56,10 +56,7 @@ const Tabs = ({
 
     if (activeTab && container) {
       const { left, width } = activeTab.getBoundingClientRect();
-      console.log("%c Line:59 🍕 width", "color:#3f7cff", width);
-      console.log("%c Line:59 🍖 left", "color:#33a5ff", left);
       const containerLeft = container.getBoundingClientRect().left;
-      console.log("%c Line:62 🥕 containerLeft", "color:#7f2b82", containerLeft);
 
       setIndicatorStyle({
         width: `${width-25}px`,
@@ -81,11 +78,11 @@ const Tabs = ({
   const tabContent = items.find((item) => item.key === activeKey);
 
   return (
-    <div className={`tabs-container ${className || ""}`}>
-      <div className="tab-whole">
+    <div className={`lcsy-tabs-container ${className || ""}`}>
+      <div className="lcsy-tabs">
         <div
           ref={tabContainerRef}
-          className={`tab-title ${centered ? "centered" : ""}`}
+          className={`lcsy-tabs-nav ${centered ? "centered" : ""}`}
         >
           {items.map((tabSet) => (
             <div
@@ -93,7 +90,7 @@ const Tabs = ({
               ref={(el) => {
                 tabRefs.current[tabSet.key] = el;
               }}
-              className={`tab ${activeKey === tabSet?.key ? "active" : ""} ${tabSet?.disabled ? "disabled" : ""}`}
+              className={`lcsy-tabs-tab ${activeKey === tabSet?.key ? "active" : ""} ${tabSet?.disabled ? "disabled" : ""}`}
               onClick={() => handleClick(tabSet.key)}
               style={{ display: tabSet.hidden ? "none" : "flex" }}
             >
@@ -101,9 +98,9 @@ const Tabs = ({
               {tabSet.label}
             </div>
           ))}
-          <div className="tab-indicator" style={indicatorStyle} />
+          <div className="lcsy-tabs-indicator" style={indicatorStyle} />
         </div>
-        <div className="tab-body">{tabContent?.children}</div>
+        <div className="lcsy-tabs-content">{tabContent?.children}</div>
       </div>
     </div>
   );
